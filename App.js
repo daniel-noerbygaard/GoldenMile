@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import Home from './Components/Home/Home'
+import { registerRootComponent } from 'expo'; // Must not be removed
+import { useState, useEffect } from 'react';
 
 export default function App() {
+  const [participants, setParticipants] = useState(5)
+  
+  useEffect(() => {
+    console.log(participants)
+  }, [participants])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Home participants={participants} setParticipants={setParticipants}/>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+registerRootComponent(App);

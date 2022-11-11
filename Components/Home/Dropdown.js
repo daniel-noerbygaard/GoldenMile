@@ -23,7 +23,7 @@ export default function Dropdown(props) {
             {props.listItems.map((item) => {
               return (
                 <Pressable
-                  style={styles.itemButton}
+                  style={styles.itemButton }
                   onPress={() => {
                     dropdownActivity();
                     setButtonText(String(item));

@@ -1,26 +1,24 @@
 import { styles } from "./styles";
-import {
-  View,
-  Image,
-  Text,
-  Dimensions,
-} from "react-native";
+import { View, Image, Text, Dimensions, Pressable } from "react-native";
 import { useState, useEffect } from "react";
 import Cursor from "./Cursor";
 import Dropdown from "./Dropdown";
+import SwipeComponent from "./SwipeComponent";
 
-export default function Home(props) {
+export default function HomeScreen({navigation}) {
   const { width } = Dimensions.get("window");
   const SLIDER_WIDTH = width - 40;
   const SELECTOR_DIAMETER = 60;
   const SELECTOR_RADIUS = SELECTOR_DIAMETER * 0.5;
-
+  const [participants, setParticipants] = useState(5)
   const [participantCoordinates, setParticipantCoordinates] = useState([]);
-  const [listItems, setListItems] = useState(Array.from(Array(props.participants).keys()))
+  const [listItems, setListItems] = useState(
+    Array.from(Array(participants).keys())
+  );
 
   useEffect(() => {
-    setListItems(Array.from(Array(props.participants).keys()))
-  }, [props.participants])
+    setListItems(Array.from(Array(participants).keys()));
+  }, [participants]);
 
   const handleOnLayout = (event, i, n) => {
     const { width, x } = event.nativeEvent.layout;
@@ -28,7 +26,7 @@ export default function Home(props) {
       [...prev, x + width / 2].sort(function (a, b) {
         return a - b; // New sorted array
       })
-    ); 
+    );
   };
 
   const setupSlider = (n) => {
@@ -66,13 +64,19 @@ export default function Home(props) {
               participantCoordinates.slice(-1)[0] - SELECTOR_RADIUS,
             ]}
             numberCoordinates={participantCoordinates}
-            setParticipants={props.setParticipants}
+            setParticipants={setParticipants}
           />
         )}
       </View>
       <Text style={styles.shotsHeader}>Shots</Text>
-      <Dropdown listItems = {listItems} />
-      
+      <Dropdown listItems={listItems} />
+      <SwipeComponent/>
+      <Pressable style={styles.goButton} onPress={() => navigation.navigate('SelectorScreen', {participants: participants})}>
+        <Text style={styles.goButtonText}>Go</Text>
+      </Pressable>
+      {/* <Pressable style={styles.goButton} onPress={() => navigation.navigate('ImageScreen', {participants: participants})}>
+        <Text style={styles.goButtonText}>Go</Text>
+      </Pressable> */}
     </View>
   );
 }

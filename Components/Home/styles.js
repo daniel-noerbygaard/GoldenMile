@@ -19,8 +19,7 @@ export const styles = StyleSheet.create({
 
     participantHeader: {
       fontSize: '50px',
-      color: 'rgb(252, 190, 6)',
-      marginBottom: 10
+      color: 'rgb(252, 190, 6)'
     },
 
     slider: {
@@ -44,8 +43,7 @@ export const styles = StyleSheet.create({
 
     numbers: {
       color: 'rgb(252, 190, 6)',
-      fontWeight: 'bold',
-      fontSize: '17.5%'
+      fontSize: 22
     },
 
     selector: {
@@ -56,43 +54,42 @@ export const styles = StyleSheet.create({
     },
 
     shotsHeader: {
-      margin: 50,
+      marginTop: 10,
       fontSize: '45px',
       color: 'rgb(252, 190, 6)',
       marginBottom: 5
     },
 
     dropdownContainer: {
-      width: '30%',
-      height: '15%',
+      width: '40%',
+      height: '5%',
       alignItems: 'center',
+      zIndex: 1,
     },
 
     dropdownButton: {
       width: '80%',
-      height: '25%',
+      height: '100%',
       borderColor: 'rgb(252, 190, 6)',
       borderWidth: 2,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
 
     dropdownText: {
       color: 'rgb(252, 190, 6)',
-      fontSize: '20%'
+      fontSize: 22
     },
 
     scrollViewContainer: {
       width: '100%',
-      height: '100%',
-      borderColor: 'rgb(109, 34, 41)',
-      backgroundColor: 'rgb(109, 34, 41)'
-
+      height: 140,
+      backgroundColor: 'rgb(109, 34, 41)',
     },
 
     shadowProp: {
       shadowColor: '#171717',
-      shadowOffset: {width: 0, height: 2},
+      shadowOffset: {width: 0, height: 4},
       shadowOpacity: 0.7,
       shadowRadius: 3
     },
@@ -100,19 +97,50 @@ export const styles = StyleSheet.create({
     scrollView: { 
       width: '100%',    
       borderColor: 'rgb(252, 190, 6)',
-      // borderWidth: 2,
     },
 
     itemButton: {
       justifyContent: 'center',
       alignItems: 'center',
-      height: 30,
+      height: 40,
       width: '80%',
       borderBottomColor: 'rgb(252, 190, 6)',
-      borderBottomWidth: 1
+      borderBottomWidth: 1,     
+      zIndex: 1 
     },
 
     itemText: {
       color: 'rgb(252, 190, 6)',
-    }
+      fontSize: 20
+    },
+
+    swipeContainer: {
+      marginTop: 20,
+      height: '20%',
+      width: '45%',
+      marginBottom: 20,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+
+    wrapper: {},
+    swipeImage: {
+      width: '100%',
+      height: '90%',
+      resizeMode: 'contain',
+    },
+
+    goButton: {
+      width: '25%',
+      aspectRatio: 1,
+      borderWidth: 2,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderColor: 'rgb(252, 190, 6)',
+    },
+
+    goButtonText: {
+      fontSize: 50,
+      color: 'rgb(252, 190, 6)'
+    },
   })

@@ -1,6 +1,3 @@
-import { Pressable, Text, View } from "react-native";
-import { styles } from "./styles";
-
 export const findSmallestDifference = (cursorPosition, array) => {
   let coordinate = array[0];
   let minDiff = array[1] - array[0];
@@ -17,3 +14,25 @@ export const findSmallestDifference = (cursorPosition, array) => {
     return coordinate;
   }
 };
+
+export const polarToCartesian = (x, y, r, degrees) => {
+  const radians = ((degrees - 90) * Math.PI) / 180.0;
+  return [x + r * Math.cos(radians), y + r * Math.sin(radians)];
+};
+
+export const translateImage = (offset, imgRadius, imgWidth, segment, segments) => {
+  const degrees = 360 / segments;
+  const centerDegree = degrees / 2;
+  const current = degrees * segment + centerDegree;
+  const cartesianCoordinates = polarToCartesian(
+    offset,
+    offset,
+    imgRadius,
+    current
+  );
+  return [current,...cartesianCoordinates.map(i=>i+(imgWidth/2)),...cartesianCoordinates];
+};
+
+export const calcRotationDegrees = () => {
+  return String(2160 + Math.floor(Math.random() * 360)) + "deg"
+}

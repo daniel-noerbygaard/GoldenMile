@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Cursor from "./Cursor";
 import Dropdown from "./Dropdown";
 import SwipeComponent from "./SwipeComponent";
+import { Participant } from "../../Participant";
 
 export default function HomeScreen({navigation}) {
   const { width } = Dimensions.get("window");
@@ -45,6 +46,11 @@ export default function HomeScreen({navigation}) {
     return components;
   };
 
+  const initCrawl = () => {
+    const participantList = [...Array(participants)].map((_,i) => new Participant(i));
+    navigation.navigate('ImageScreen', {participantList: participantList})
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -71,12 +77,9 @@ export default function HomeScreen({navigation}) {
       <Text style={styles.shotsHeader}>Shots</Text>
       <Dropdown listItems={listItems} />
       <SwipeComponent/>
-      <Pressable style={styles.goButton} onPress={() => navigation.navigate('SelectorScreen', {participants: participants})}>
+      <Pressable style={styles.goButton} onPress={initCrawl}>
         <Text style={styles.goButtonText}>Go</Text>
       </Pressable>
-      {/* <Pressable style={styles.goButton} onPress={() => navigation.navigate('ImageScreen', {participants: participants})}>
-        <Text style={styles.goButtonText}>Go</Text>
-      </Pressable> */}
     </View>
   );
 }

@@ -1,51 +1,49 @@
-import { Text, View, Pressable, Image } from "react-native";
-import React, { useEffect, useState, useRef } from "react";
+import { Text, View, Pressable, TextInput } from "react-native";
+import React, { useEffect, useState } from "react";
 import { styles } from "./styles";
-import { Camera } from "expo-camera";
+import * as Icon from "react-native-feather";
 
-export default function ImageScreen({route}){
-  let cameraRef = useRef();
-  const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [photo, setPhoto] = useState()
-  participants = [...Array(route.params.participants).keys()]
+export default function ImageScreen({ navigation, route }) {
+  const [participantList, setParticipantList] = useState(route.params.participantList);
 
-  useEffect(() => {
-    (async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraPermission.status === "granted");
-    })();
-  }, []);
-
-  if (hasCameraPermission === undefined) {
-    return <Text>Requesting permission...</Text>;
-  } else if (!hasCameraPermission) {
-    return (
-      <Text>Permission for camera not granted. Please change in settings.</Text>
-    );
-  }
-
-  let takePicture = async () => {
-    const options = {
-        quality: 1,
-        base64: true,
-        exif: false
-    }
-
-    setPhoto(await cameraRef.current.takePictureAsync(options))
-  }
-
-  if (photo){
-    return <Image style={styles.preview} source={{uri: "data:image/jpg;base64,"+photo.base64}}/>
-  }
+  const handleTextChanged = (i, text) => {
+    const tempArray = [...participantList];
+    tempArray[i].Name = text;
+    setParticipantList(tempArray);
+  };
 
   return (
     <View style={styles.container}>
-      {participants.map(particap => (
-        <View style={styles.participantContainer}></View>
-      ))}
-      {/* <Camera style={styles.camera} ref={cameraRef}>
-      <Pressable style={styles.button} onPress={takePicture} />
-      </Camera> */}
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Add</Text>
+      </View>
+      <View style={styles.participantContainer}>
+        {participantList.map((e, i) => (
+          <View style={styles.participantRowContainer}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={(text) => handleTextChanged(i, text)}
+              value={e.Name}
+              placeholder={"Name"}
+              placeholderTextColor={"rgb(196,148,6)"}
+            ></TextInput>
+            <Pressable
+              style={styles.participantCameraButton}
+              onPress={() =>
+                navigation.navigate("CameraComponent", {
+                  participantList: participantList,
+                })
+              }
+            >
+              <Icon.Camera
+                width={35}
+                height={35}
+                color={"rgb(252, 190, 6)"}
+              ></Icon.Camera>
+            </Pressable>
+          </View>
+        ))}
+      </View>
     </View>
   );
-};
+}

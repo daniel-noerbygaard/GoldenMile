@@ -4,6 +4,7 @@ import HomeScreen from "./Components/Home/HomeScreen";
 import { registerRootComponent } from "expo";
 import SelectorScreen from "./Components/Selector/SelectorScreen";
 import ImageScreen from "./Components/ImageSelector/ImageScreen";
+import CameraComponent from "./Components/ImageSelector/CameraComponent";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default Navigator = () => {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="SelectorScreen" component={SelectorScreen} />
         <Stack.Screen name="ImageScreen" component={ImageScreen} />
+        <Stack.Screen name="CameraComponent" component={CameraComponent} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,6 +5,12 @@ import React from "react";
 import { Pressable } from "react-native";
 import { styles } from "./styles";
 import * as Icon from "react-native-feather";
+import {
+  manipulateAsync,
+  ActionCrop,
+  ActionResize,
+  SaveFormat,
+} from "expo-image-manipulator";
 
 export default function CameraComponent({ navigation, route }) {
   const { height, width } = Dimensions.get("window");
@@ -12,6 +18,7 @@ export default function CameraComponent({ navigation, route }) {
   let cameraRef = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [photo, setPhoto] = useState();
+  const cameraOffset = 0.5 * height - 0.65 * width;
 
   useEffect(() => {
     (async () => {
@@ -31,11 +38,26 @@ export default function CameraComponent({ navigation, route }) {
   let takePhoto = async () => {
     const options = {
       quality: 1,
-      base64: true,
-      exif: false,
     };
-
-    setPhoto(await cameraRef.current.takePictureAsync(options));
+    imgObject = await cameraRef.current.takePictureAsync(options);
+    ra
+    tio = imgObject.width/width
+    const manipResult = await manipulateAsync(
+      imgObject.uri,
+      [
+        {
+          crop: {
+            height: ratio*width,
+            width: ratio*width,
+            originX: 0,
+            originY: cameraOffset*ratio,
+          },
+        },
+      ],
+      { compress: 1 }
+    );
+    debugger;
+    setPhoto(manipResult);
   };
 
   const goBack = () => {
@@ -51,13 +73,19 @@ export default function CameraComponent({ navigation, route }) {
   if (photo) {
     return (
       <>
-        <Image
-          style={styles.preview}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        />
-        <Pressable style={styles.cancelButton} onPress={cancelPhoto}>
-          <Icon.X width={30} height={30} color={"white"}></Icon.X>
-        </Pressable>
+        <View style={styles.previewContainer}>
+          <Image
+            style={{
+              width: width,
+              height: width,
+              top: cameraOffset
+            }}
+            source={{ uri: photo.uri }}
+          />
+          <Pressable style={styles.cancelButton} onPress={cancelPhoto}>
+            <Icon.X width={30} height={30} color={"white"}></Icon.X>
+          </Pressable>
+        </View>
       </>
     );
   } else
@@ -66,7 +94,7 @@ export default function CameraComponent({ navigation, route }) {
         <Camera style={styles.camera} ref={cameraRef}>
           <View
             style={{
-              height: 0.5 * height - 0.5 * width,
+              height: cameraOffset,
               width: width,
               backgroundColor: "black",
             }}
@@ -82,12 +110,12 @@ export default function CameraComponent({ navigation, route }) {
 
           <View
             style={{
-              height: 0.5 * height - 0.5 * width,
+              height: height-(cameraOffset+width),
               width: width,
               backgroundColor: "black",
-              top: "75%",
+              top: cameraOffset + width,
               position: "absolute",
-              alignItems: 'center'
+              alignItems: "center",
             }}
           >
             <Pressable style={styles.takePhoto} onPress={takePhoto} />

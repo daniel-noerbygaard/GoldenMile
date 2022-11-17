@@ -50,13 +50,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  // cameraContainer: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   backgroundColor: 'black',
-  //   marginTop: "auto"
-  // },
-
   camera: {
     flex: 1,
     alignItems: 'center',
@@ -68,7 +61,7 @@ export const styles = StyleSheet.create({
     borderRadius: '50%',
     borderWidth: 7,
     borderColor: 'white',
-    marginTop: '5%'
+    marginTop: '10%'
   },
 
   cancelButton: {
@@ -81,8 +74,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  preview: {
-    alignSelf: "stretch",
+  previewContainer: {
     flex: 1,
+    backgroundColor: 'black',
+    alignItems: "center",
+    borderWidth: 0
+  },
+
+  preview: {
+    // alignSelf: "stretch",
+    // flex: 1
+    width: 300,
+    height: 300
   },
 });

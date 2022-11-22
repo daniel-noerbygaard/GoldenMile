@@ -4,18 +4,22 @@ import { useState, useEffect } from "react";
 import Cursor from "./Cursor";
 import Dropdown from "./Dropdown";
 import SwipeComponent from "./SwipeComponent";
+import SwipeComponent2 from "./SwipeComponent2";
 import { Participant } from "../../Participant";
+import { createShotArray } from "../../utils";
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({ navigation }) {
   const { width } = Dimensions.get("window");
   const SLIDER_WIDTH = width - 40;
   const SELECTOR_DIAMETER = 60;
   const SELECTOR_RADIUS = SELECTOR_DIAMETER * 0.5;
-  const [participants, setParticipants] = useState(5)
+  const [participants, setParticipants] = useState(5);
   const [participantCoordinates, setParticipantCoordinates] = useState([]);
   const [listItems, setListItems] = useState(
     Array.from(Array(participants).keys())
   );
+  const [numShots, setNumShots] = useState(0);
+  const [shotIndex, setShotIndex] = useState(0);
 
   useEffect(() => {
     setListItems(Array.from(Array(participants).keys()));
@@ -47,9 +51,15 @@ export default function HomeScreen({navigation}) {
   };
 
   const initCrawl = () => {
-    const participantList = [...Array(participants)].map((_,i) => new Participant(i));
-    navigation.navigate('ImageScreen', {participantList: participantList})
-  }
+    const participantList = [...Array(participants)].map(
+      (_, i) => new Participant(i)
+    );
+    navigation.navigate("ImageScreen", {
+      participantList: participantList,
+      binArray: createShotArray(numShots, participants),
+      shotIndex: shotIndex
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -75,8 +85,9 @@ export default function HomeScreen({navigation}) {
         )}
       </View>
       <Text style={styles.shotsHeader}>Shots</Text>
-      <Dropdown listItems={listItems} />
-      <SwipeComponent/>
+      <Dropdown listItems={listItems} setNumShots={setNumShots} />
+      <SwipeComponent setShotIndex={setShotIndex} />
+      {/* <SwipeComponent2 setShotIndex={setShotIndex} width={width}/> */}
       <Pressable style={styles.goButton} onPress={initCrawl}>
         <Text style={styles.goButtonText}>Go</Text>
       </Pressable>

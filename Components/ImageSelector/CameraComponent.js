@@ -40,29 +40,38 @@ export default function CameraComponent({ navigation, route }) {
       quality: 1,
     };
     imgObject = await cameraRef.current.takePictureAsync(options);
-    ra
-    tio = imgObject.width/width
+    ratio = imgObject.width / width;
     const manipResult = await manipulateAsync(
       imgObject.uri,
       [
         {
           crop: {
-            height: ratio*width,
-            width: ratio*width,
+            height: ratio * width,
+            width: ratio * width,
             originX: 0,
-            originY: cameraOffset*ratio,
+            originY: cameraOffset * ratio,
           },
         },
       ],
       { compress: 1 }
     );
-    debugger;
     setPhoto(manipResult);
+  };
+
+  const approveImage = () => {
+    participantList[route.params.imgIndex].ImgPath = photo.uri;
+    navigation.navigate("ImageScreen", {
+      participantList: participantList,
+      binArray: route.params.binArray,
+      shotIndex: route.params.shotIndex,
+    });
   };
 
   const goBack = () => {
     navigation.navigate("ImageScreen", {
       participantList: participantList,
+      binArray: route.params.binArray,
+      shotIndex: route.params.shotIndex,
     });
   };
 
@@ -78,10 +87,16 @@ export default function CameraComponent({ navigation, route }) {
             style={{
               width: width,
               height: width,
-              top: cameraOffset
+              top: cameraOffset,
             }}
             source={{ uri: photo.uri }}
           />
+          <Pressable
+            style={[styles.heartButton, { top: cameraOffset + 0.05 * height }]}
+            onPress={approveImage}
+          >
+            <Icon.Heart width={"100%"} height={"100%"} color={"white"} />
+          </Pressable>
           <Pressable style={styles.cancelButton} onPress={cancelPhoto}>
             <Icon.X width={30} height={30} color={"white"}></Icon.X>
           </Pressable>
@@ -99,18 +114,14 @@ export default function CameraComponent({ navigation, route }) {
               backgroundColor: "black",
             }}
           >
-            <Pressable style={styles.cancelButton} onPress={goBack}>
-              <Icon.ChevronLeft
-                width={30}
-                height={30}
-                color={"white"}
-              ></Icon.ChevronLeft>
+            <Pressable style={styles.backButton} onPress={goBack}>
+              <Icon.ChevronLeft width={30} height={30} color={"white"} />
             </Pressable>
           </View>
 
           <View
             style={{
-              height: height-(cameraOffset+width),
+              height: height - (cameraOffset + width),
               width: width,
               backgroundColor: "black",
               top: cameraOffset + width,
@@ -118,7 +129,10 @@ export default function CameraComponent({ navigation, route }) {
               alignItems: "center",
             }}
           >
-            <Pressable style={styles.takePhoto} onPress={takePhoto} />
+            <Pressable
+              style={[styles.takePhoto, { top: 0.05 * height }]}
+              onPress={takePhoto}
+            />
           </View>
         </Camera>
       </>

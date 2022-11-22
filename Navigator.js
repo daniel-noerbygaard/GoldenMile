@@ -15,10 +15,10 @@ export default Navigator = () => {
         screenOptions={{ headerShown: false }}
         initialRouteName="HomeScreen"
       >
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="SelectorScreen" component={SelectorScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />        
         <Stack.Screen name="ImageScreen" component={ImageScreen} />
         <Stack.Screen name="CameraComponent" component={CameraComponent} />
+        <Stack.Screen name="SelectorScreen" component={SelectorScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

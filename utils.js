@@ -1,3 +1,16 @@
+const baseDeg = 360*10
+
+export const createShotArray = (numShots, participants) => {
+  let binArray = new Array(participants).fill(0)
+  binArray = binArray.fill(1,0,numShots)
+  let i = binArray.length
+  while (--i > 0) {
+    let randIndex = Math.floor(Math.random() * (i + 1));
+    [binArray[randIndex], binArray[i]] = [binArray[i], binArray[randIndex]];
+  }
+  return binArray
+}
+
 export const findSmallestDifference = (cursorPosition, array) => {
   let coordinate = array[0];
   let minDiff = array[1] - array[0];
@@ -34,5 +47,10 @@ export const translateImage = (offset, imgRadius, imgWidth, segment, segments) =
 };
 
 export const calcRotationDegrees = () => {
-  return String(2160 + Math.floor(Math.random() * 360)) + "deg"
+  return String(baseDeg + Math.floor(Math.random() * 360)) + "deg"
+}
+
+export const getImageIndex = (deg, participants) => {
+  const excess = parseInt(deg.split("deg")[0])-baseDeg
+  return (participants-1)-Math.floor(participants*(excess/360)) 
 }

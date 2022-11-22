@@ -60,11 +60,33 @@ export const styles = StyleSheet.create({
     aspectRatio: 1,
     borderRadius: '50%',
     borderWidth: 7,
-    borderColor: 'white',
-    marginTop: '10%'
+    borderColor: 'white'
   },
 
   cancelButton: {
+    width: "15%",
+    aspectRatio: 1,
+    position: 'absolute',
+    top: '5%',
+    left: '2%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  heartButton: {
+    width: "20%",
+    aspectRatio: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  previewContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+    alignItems: "center",
+  },
+
+  backButton: {
     width: "15%",
     aspectRatio: 1,
     position: 'absolute',
@@ -74,17 +96,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  previewContainer: {
-    flex: 1,
-    backgroundColor: 'black',
-    alignItems: "center",
-    borderWidth: 0
+  goButton: {
+    width: '25%',
+    aspectRatio: 1,
+    position: 'absolute',
+    bottom: '10%',
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'rgb(252, 190, 6)',
   },
 
-  preview: {
-    // alignSelf: "stretch",
-    // flex: 1
-    width: 300,
-    height: 300
+  goButtonText: {
+    fontSize: 50,
+    color: 'rgb(252, 190, 6)'
   },
 });

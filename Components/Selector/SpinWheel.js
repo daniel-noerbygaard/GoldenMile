@@ -1,25 +1,15 @@
-import { View, Text } from "react-native";
 import React from "react";
 import Svg, { Path, G, ClipPath, Image, Defs } from "react-native-svg";
-import { styles } from "./styles";
-import { polarToCartesian, translateImage } from "../Home/utils";
-import { useState } from "react";
+import { polarToCartesian, translateImage } from "../../utils";
 
 export default function SpinWheel(props) {
-  const [imgList, setImgList] = useState([
-    { image: require("../../assets/arnbitter.png") },
-    { image: require("../../assets/arnbitter.png") },
-    { image: require("../../assets/arnbitter.png") },
-    { image: require("../../assets/arnbitter.png") },
-    { image: require("../../assets/arnbitter.png") },
-  ]);
-
   const svgSize = 100;
-  const imgWidth = 40;
-  const offset = svgSize / 2 - imgWidth/2;
+  // const imgWidth = -51*Math.log(props.participantList.length)+140.5;
+  const imgWidth = 35 * (1 + Math.exp(2 - 0.45 * props.participantList.length));
+  const offset = svgSize / 2 - imgWidth / 2;
   const radius = 0.49 * svgSize;
   const holeWidth = 0.7 * radius;
-  const imgRadius = radius-holeWidth/2
+  const imgRadius = radius - holeWidth / 2;
 
   const segmentPath = (currentSegment, segmentNumber) => {
     const center = svgSize / 2;
@@ -50,23 +40,22 @@ export default function SpinWheel(props) {
   const createNSegments = (n) => {
     const segments = [];
     for (let i = 0; i < n; i++) {
-      let translation = translateImage(offset,imgRadius, imgWidth, i, n)
-      debugger
+      let translation = translateImage(offset, imgRadius, imgWidth, i, n);
       segments.push(
         <G key={i}>
           <Defs>
-            <ClipPath id={"shape"+String(i)} height="40" width="40">
+            <ClipPath id={"shape" + String(i)} height="40" width="40">
               <Path d={segmentPath(i, n)} fill="none" />
             </ClipPath>
           </Defs>
-          <G clipPath={"url(#shape" +String(i)+")"}>
+          <G clipPath={"url(#shape" + String(i) + ")"}>
             <Image
-              transform={'rotate('+translation.slice(0,3)+')'}
+              transform={"rotate(" + translation.slice(0, 3) + ")"}
               x={translation[3]}
               y={translation[4]}
               width={imgWidth}
               height={imgWidth}
-              href={imgList[i].image}
+              href={props.participantList[i].ImgPath}
             />
             <Path
               d={segmentPath(i, n)}
@@ -81,9 +70,9 @@ export default function SpinWheel(props) {
     return segments;
   };
 
-  return (    
+  return (
     <Svg width="100%" height="100%" viewBox={`0 0 100 100`}>
-      {createNSegments(props.participants)}
+      {createNSegments(props.participantList.length)}
     </Svg>
   );
 }

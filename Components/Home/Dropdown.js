@@ -15,7 +15,7 @@ export default function Dropdown(props) {
         <Text style={styles.dropdownText}>{buttonText}</Text>
       </Pressable>
       {dropDownActive && (
-        <View style={[styles.scrollViewContainer, styles.shadowProp]}>
+        <View style={styles.scrollViewContainer}>
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={{ alignItems: "center" }}
@@ -27,6 +27,7 @@ export default function Dropdown(props) {
                   onPress={() => {
                     dropdownActivity();
                     setButtonText(String(item));
+                    props.setNumShots(item)
                   }}
                 >
                   <Text style={styles.itemText}>{item}</Text>

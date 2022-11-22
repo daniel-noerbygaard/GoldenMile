@@ -85,9 +85,6 @@ export const styles = StyleSheet.create({
       width: '100%',
       height: 140,
       backgroundColor: 'rgb(109, 34, 41)',
-    },
-
-    shadowProp: {
       shadowColor: '#171717',
       shadowOffset: {width: 0, height: 4},
       shadowOpacity: 0.7,
@@ -115,12 +112,11 @@ export const styles = StyleSheet.create({
     },
 
     swipeContainer: {
+      // flex: 1,
       marginTop: 20,
-      height: '20%',
-      width: '45%',
       marginBottom: 20,
-      alignItems: 'center',
-      justifyContent: 'center'
+      width: '45%',
+      height: '20%'
     },
 
     wrapper: {},

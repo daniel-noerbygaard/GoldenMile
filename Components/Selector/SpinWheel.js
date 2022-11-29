@@ -1,10 +1,9 @@
 import React from "react";
-import Svg, { Path, G, ClipPath, Image, Defs } from "react-native-svg";
-import { polarToCartesian, translateImage } from "../../utils";
+import Svg, { Path, G, ClipPath, Image, Defs, Circle, Pattern } from "react-native-svg";
+import { polarToCartesian, translateImage } from "../../Utility/utils";
 
 export default function SpinWheel(props) {
   const svgSize = 100;
-  // const imgWidth = -51*Math.log(props.participantList.length)+140.5;
   const imgWidth = 35 * (1 + Math.exp(2 - 0.45 * props.participantList.length));
   const offset = svgSize / 2 - imgWidth / 2;
   const radius = 0.49 * svgSize;
@@ -15,7 +14,6 @@ export default function SpinWheel(props) {
     const center = svgSize / 2;
     const degrees = 360 / segmentNumber;
     const start = degrees * currentSegment;
-    // const end = (degrees * (currentSegment + 1 - margin) + (margin === 0 ? 1 : 0))
     const end = degrees * (currentSegment + 1);
     const arc = Math.abs(start - end) > 180 ? 1 : 0;
 
@@ -70,9 +68,26 @@ export default function SpinWheel(props) {
     return segments;
   };
 
+  const createDonut = img => {
+    const center = svgSize/2
+    const holeRadius = holeWidth/2
+
+    return (
+    <G>
+      <Defs>
+        <Pattern id="pattern" patternUnits="userSpaceOnUse" width="100" height="100">
+          <Image href={img} x={0} y={0} width={svgSize} height={svgSize}/>
+        </Pattern>
+      </Defs>
+      <Circle cx={center} cy={center} r={radius} stroke={"#E2E6FE"} strokeWidth={"0.6px"} fill={"url(#pattern)"} />
+      <Circle cx={center} cy={center} r={holeRadius} stroke={"#E2E6FE"} strokeWidth={"0.6px"} fill={"#04031b"} />
+    </G>
+    )}
+
   return (
     <Svg width="100%" height="100%" viewBox={`0 0 100 100`}>
-      {createNSegments(props.participantList.length)}
+      {props.participantList.length > 1 ? createNSegments(props.participantList.length) : 
+      createDonut(props.participantList[0].ImgPath)}
     </Svg>
   );
 }

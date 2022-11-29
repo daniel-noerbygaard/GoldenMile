@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import Cursor from "./Cursor";
 import Dropdown from "./Dropdown";
 import SwipeComponent from "./SwipeComponent";
-import SwipeComponent2 from "./SwipeComponent2";
 import { Participant } from "../../Participant";
-import { createShotArray } from "../../utils";
+import { createShotArray } from "../../Utility/utils";
 
 export default function HomeScreen({ navigation }) {
   const { width } = Dimensions.get("window");
@@ -15,6 +14,7 @@ export default function HomeScreen({ navigation }) {
   const SELECTOR_RADIUS = SELECTOR_DIAMETER * 0.5;
   const [participants, setParticipants] = useState(5);
   const [participantCoordinates, setParticipantCoordinates] = useState([]);
+  const [buttonText, setButtonText] = useState("Click");
   const [listItems, setListItems] = useState(
     Array.from(Array(participants).keys())
   );
@@ -22,6 +22,7 @@ export default function HomeScreen({ navigation }) {
   const [shotIndex, setShotIndex] = useState(0);
 
   useEffect(() => {
+    setButtonText("Click");
     setListItems(Array.from(Array(participants).keys()));
   }, [participants]);
 
@@ -57,7 +58,8 @@ export default function HomeScreen({ navigation }) {
     navigation.navigate("ImageScreen", {
       participantList: participantList,
       binArray: createShotArray(numShots, participants),
-      shotIndex: shotIndex
+      shotIndex: shotIndex,
+      disableStart: true
     });
   };
 
@@ -85,11 +87,15 @@ export default function HomeScreen({ navigation }) {
         )}
       </View>
       <Text style={styles.shotsHeader}>Shots</Text>
-      <Dropdown listItems={listItems} setNumShots={setNumShots} />
-      <SwipeComponent setShotIndex={setShotIndex} />
-      {/* <SwipeComponent2 setShotIndex={setShotIndex} width={width}/> */}
-      <Pressable style={styles.goButton} onPress={initCrawl}>
-        <Text style={styles.goButtonText}>Go</Text>
+      <Dropdown
+        listItems={listItems}
+        setNumShots={setNumShots}
+        buttonText={buttonText}
+        setButtonText={setButtonText}
+      />
+      <SwipeComponent shotIndex={shotIndex} setShotIndex={setShotIndex} width={width} />
+      <Pressable style={styles.addButton} onPress={initCrawl}>
+        <Text style={styles.addButtonText}>Add</Text>
       </Pressable>
     </View>
   );

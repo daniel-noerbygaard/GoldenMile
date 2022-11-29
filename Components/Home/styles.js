@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../Utility/enums";
 
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
       marginTop: 0,
-      backgroundColor: 'rgb(109, 34, 41)',
+      backgroundColor: colors.bordeaux,
       alignItems: 'center',
       marginTop: 'auto'
     },
@@ -19,7 +20,7 @@ export const styles = StyleSheet.create({
 
     participantHeader: {
       fontSize: '50px',
-      color: 'rgb(252, 190, 6)'
+      color: colors.yellow
     },
 
     slider: {
@@ -34,29 +35,29 @@ export const styles = StyleSheet.create({
       alignItems: 'center',  
       justifyContent: 'space-evenly',
       flexDirection: 'row',
-      borderTopColor: 'rgb(252, 190, 6)',
-      borderBottomColor: 'rgb(252, 190, 6)',
-      borderRightColor: 'rgb(109, 34, 41)',
-      borderLeftColor: 'rgb(109, 34, 41)',
+      borderTopColor: colors.yellow,
+      borderBottomColor: colors.yellow,
+      borderRightColor: colors.bordeaux,
+      borderLeftColor: colors.bordeaux,
       borderWidth: 2
     },
 
     numbers: {
-      color: 'rgb(252, 190, 6)',
+      color: colors.yellow,
       fontSize: 22
     },
 
     selector: {
       borderRadius: '50%',
       borderWidth: 4,
-      borderColor: 'rgb(252, 190, 6)',
+      borderColor: colors.yellow,
       position: 'absolute',
     },
 
     shotsHeader: {
       marginTop: 10,
       fontSize: '45px',
-      color: 'rgb(252, 190, 6)',
+      color: colors.yellow,
       marginBottom: 5
     },
 
@@ -70,21 +71,21 @@ export const styles = StyleSheet.create({
     dropdownButton: {
       width: '80%',
       height: '100%',
-      borderColor: 'rgb(252, 190, 6)',
+      borderColor: colors.yellow,
       borderWidth: 2,
       alignItems: 'center',
       justifyContent: 'center',
     },
 
     dropdownText: {
-      color: 'rgb(252, 190, 6)',
+      color: colors.yellow,
       fontSize: 22
     },
 
     scrollViewContainer: {
       width: '100%',
       height: 140,
-      backgroundColor: 'rgb(109, 34, 41)',
+      backgroundColor: colors.bordeaux,
       shadowColor: '#171717',
       shadowOffset: {width: 0, height: 4},
       shadowOpacity: 0.7,
@@ -93,7 +94,7 @@ export const styles = StyleSheet.create({
 
     scrollView: { 
       width: '100%',    
-      borderColor: 'rgb(252, 190, 6)',
+      borderColor: colors.yellow,
     },
 
     itemButton: {
@@ -101,42 +102,29 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       height: 40,
       width: '80%',
-      borderBottomColor: 'rgb(252, 190, 6)',
+      borderBottomColor: colors.yellow,
       borderBottomWidth: 1,     
       zIndex: 1 
     },
 
     itemText: {
-      color: 'rgb(252, 190, 6)',
+      color: colors.yellow,
       fontSize: 20
     },
 
-    swipeContainer: {
-      // flex: 1,
-      marginTop: 20,
-      marginBottom: 20,
-      width: '45%',
-      height: '20%'
-    },
-
-    wrapper: {},
-    swipeImage: {
-      width: '100%',
-      height: '90%',
-      resizeMode: 'contain',
-    },
-
-    goButton: {
+    addButton: {
       width: '25%',
       aspectRatio: 1,
       borderWidth: 2,
       justifyContent: 'center',
       alignItems: 'center',
-      borderColor: 'rgb(252, 190, 6)',
+      borderColor: colors.yellow,
+      bottom: '5%',
+      position: 'absolute'
     },
 
-    goButtonText: {
-      fontSize: 50,
-      color: 'rgb(252, 190, 6)'
+    addButtonText: {
+      fontSize: 45,
+      color: colors.yellow      
     },
   })

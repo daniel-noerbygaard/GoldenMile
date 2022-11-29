@@ -28,6 +28,16 @@ export const findSmallestDifference = (cursorPosition, array) => {
   }
 };
 
+export const countFilledImages = (array) => {
+  let emptyImages = array.length
+  array.forEach(element => {
+    if (element.ImgPath){
+      emptyImages--;
+    } 
+  });
+  return emptyImages > 0;
+}
+
 export const polarToCartesian = (x, y, r, degrees) => {
   const radians = ((degrees - 90) * Math.PI) / 180.0;
   return [x + r * Math.cos(radians), y + r * Math.sin(radians)];

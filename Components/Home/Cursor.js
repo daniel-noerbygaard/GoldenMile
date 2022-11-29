@@ -2,7 +2,7 @@ import React from "react";
 import { styles } from "./styles";
 import { useRef } from "react";
 import { Animated, PanResponder } from "react-native";
-import { findSmallestDifference } from "../../utils";
+import { findSmallestDifference } from "../../Utility/utils";
 
 export default function Cursor(props) {
   const selector = useRef(

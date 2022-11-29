@@ -23,7 +23,8 @@
     "react-native-svg": "12.3.0",
     "react-native-swiper": "^1.6.0-rc.3",
     "save": "^2.9.0",
-    "expo-image-manipulator": "~10.4.0"
+    "expo-image-manipulator": "~10.4.0",
+    "expo-media-library": "~14.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

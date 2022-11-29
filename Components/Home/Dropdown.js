@@ -4,7 +4,7 @@ import { styles } from "./styles";
 
 export default function Dropdown(props) {
   const [dropDownActive, setDropDownActive] = useState(false);
-  const [buttonText, setButtonText] = useState("Click");
+  
   const dropdownActivity = () => {
     !dropDownActive ? setDropDownActive(true) : setDropDownActive(false);
   };
@@ -12,7 +12,7 @@ export default function Dropdown(props) {
   return (
     <View style={styles.dropdownContainer}>
       <Pressable style={styles.dropdownButton} onPress={dropdownActivity}>
-        <Text style={styles.dropdownText}>{buttonText}</Text>
+        <Text style={styles.dropdownText}>{props.buttonText}</Text>
       </Pressable>
       {dropDownActive && (
         <View style={styles.scrollViewContainer}>
@@ -26,7 +26,7 @@ export default function Dropdown(props) {
                   style={styles.itemButton }
                   onPress={() => {
                     dropdownActivity();
-                    setButtonText(String(item));
+                    props.setButtonText(String(item));
                     props.setNumShots(item)
                   }}
                 >

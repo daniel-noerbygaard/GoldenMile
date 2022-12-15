@@ -10,7 +10,6 @@ export default function ImageScreen({ navigation, route }) {
   const [namesFilled, setNamesFilled] = useState([]);
   const emptyImages = route.params.disableStart;
   const [emptyNames, setEmptyNames] = useState(true);
-  debugger
     
   useEffect(() => {
     if (namesFilled.length === participantList.length){

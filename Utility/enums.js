@@ -11,4 +11,6 @@ export const colors = {
   yellow: "rgb(252, 190, 6)",
   bordeaux: "rgb(109, 34, 41)",
   marina: "#04031b",
+  black: "#000000",
+  white: "#ffffff"
 };

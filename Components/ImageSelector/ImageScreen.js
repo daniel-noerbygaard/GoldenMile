@@ -8,8 +8,8 @@ export default function ImageScreen({ navigation, route }) {
     route.params.participantList
   );
   const [namesFilled, setNamesFilled] = useState([]);
-  const emptyImages = route.params.disableStart;
   const [emptyNames, setEmptyNames] = useState(true);
+  const emptyImages = route.params.disableStart;
     
   useEffect(() => {
     if (namesFilled.length === participantList.length){
@@ -51,12 +51,19 @@ export default function ImageScreen({ navigation, route }) {
               placeholderTextColor={"rgba(196,148,6,0.7)"}
             ></TextInput>            
             {e.ImgPath ? (
-              <>
+              route.params.cameraOption ? <>
+              <Pressable style={styles.participantImageButton} disabled={true}>
+                <Icon.Image top='3%' opacity={0.4} width={32} height={32} color={"rgb(252, 190, 6)"} />
+              </Pressable>
+              <Pressable style={styles.participantCameraButton} disabled={true}>
+                <Icon.Check width={35} height={35} color={"rgb(252, 190, 6)"} />
+              </Pressable>
+            </> : <>
                 <Pressable style={styles.participantImageButton} disabled={true}>
-                  <Icon.Image top='3%' opacity={0.4} width={32} height={32} color={"rgb(252, 190, 6)"} />
+                  <Icon.Check top='3%' opacity={0.4} width={32} height={32} color={"rgb(252, 190, 6)"} />
                 </Pressable>
                 <Pressable style={styles.participantCameraButton} disabled={true}>
-                  <Icon.Check width={35} height={35} color={"rgb(252, 190, 6)"} />
+                  <Icon.Camera width={35} height={35} color={"rgb(252, 190, 6)"} />
                 </Pressable>
               </>
             ) : (
@@ -75,7 +82,7 @@ export default function ImageScreen({ navigation, route }) {
       <Pressable
         style={[
           styles.goButton,
-          (!emptyImages || !emptyNames) ? { opacity: 1 } : { opacity: 0.3 },
+          {opacity: (!emptyImages || !emptyNames) ? 1 : 0.3},
         ]}
         disabled={(!emptyImages || !emptyNames) ? false : true}
         onPress={() =>

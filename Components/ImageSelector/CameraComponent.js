@@ -85,6 +85,7 @@ export default function CameraComponent({ navigation, route }) {
       binArray: route.params.binArray,
       shotIndex: route.params.shotIndex,
       disableStart: countFilledImages(participantList),
+      cameraOption: true
     });
   };
 
